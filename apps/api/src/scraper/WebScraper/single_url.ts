@@ -27,7 +27,7 @@ export const baseScrapers = [
   "fire-engine",
   "fire-engine;chrome-cdp",
   "scrapingBee",
-  process.env.USE_DB_AUTHENTICATION ? undefined : "playwright",
+  process.env.USE_DB_AUTHENTICATION ? "false" : "playwright",
   "scrapingBeeLoad",
   "fetch",
 ].filter(Boolean);
@@ -85,10 +85,10 @@ function getScrapingFallbackOrder(
   });
 
   let defaultOrder = [
-    !process.env.USE_DB_AUTHENTICATION ? undefined : "fire-engine",
-    !process.env.USE_DB_AUTHENTICATION ? undefined : "fire-engine;chrome-cdp",
+    !process.env.USE_DB_AUTHENTICATION ? "false" : "fire-engine",
+    !process.env.USE_DB_AUTHENTICATION ? "false" : "fire-engine;chrome-cdp",
     "scrapingBee",
-    process.env.USE_DB_AUTHENTICATION ? undefined : "playwright",
+    process.env.USE_DB_AUTHENTICATION ? "false" : "playwright",
     "scrapingBeeLoad",
     "fetch",
   ].filter(Boolean);
@@ -96,7 +96,7 @@ function getScrapingFallbackOrder(
   if (isWaitPresent || isScreenshotPresent || isHeadersPresent) {
     defaultOrder = [
       "fire-engine",
-      process.env.USE_DB_AUTHENTICATION ? undefined : "playwright",
+      process.env.USE_DB_AUTHENTICATION ? "false" : "playwright",
       ...defaultOrder.filter(
         (scraper) => scraper !== "fire-engine" && scraper !== "playwright"
       ),
